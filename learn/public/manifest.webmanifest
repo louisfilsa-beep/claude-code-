@@ -1,0 +1,18 @@
+{
+  "name": "DriveAruba Learn",
+  "short_name": "DriveAruba",
+  "description": "Gamified learning for the Aruba driving theory exam. Learn. Practice. Pass.",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#F4FAFF",
+  "theme_color": "#0E8BD6",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
