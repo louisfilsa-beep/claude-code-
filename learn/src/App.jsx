@@ -1,25 +1,24 @@
-import Nav from './components/Nav.jsx';
-import Hero from './components/Hero.jsx';
-import Features from './components/Features.jsx';
-import HowItWorks from './components/HowItWorks.jsx';
-import Topics from './components/Topics.jsx';
-import Gamification from './components/Gamification.jsx';
-import FinalCTA from './components/FinalCTA.jsx';
-import Footer from './components/Footer.jsx';
+import { useHashRoute } from './lib/router.js';
+import Landing from './components/Landing.jsx';
+import AppShell from './components/app/AppShell.jsx';
+import LessonPlayer from './components/app/LessonPlayer.jsx';
+
+const LESSON_PREFIX = '/lesson/';
 
 export default function App() {
-  return (
-    <>
-      <Nav />
-      <main>
-        <Hero />
-        <Features />
-        <HowItWorks />
-        <Topics />
-        <Gamification />
-        <FinalCTA />
-      </main>
-      <Footer />
-    </>
-  );
+  const path = useHashRoute();
+
+  // Full-screen lesson player.
+  if (path.startsWith(LESSON_PREFIX)) {
+    const id = decodeURIComponent(path.slice(LESSON_PREFIX.length));
+    return <LessonPlayer lessonId={id} />;
+  }
+
+  // The app tabs.
+  if (path === '/learn' || path === '/practice' || path === '/profile') {
+    return <AppShell path={path} />;
+  }
+
+  // Everything else (/, and landing section anchors like #features) = landing.
+  return <Landing />;
 }

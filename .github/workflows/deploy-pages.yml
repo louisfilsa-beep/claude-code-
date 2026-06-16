@@ -1,11 +1,10 @@
-# Builds and deploys the whole GitHub Pages site:
-#   /        -> the existing Velox AI landing page (static index.html at repo root)
-#   /learn/  -> DriveAruba Learn (the Vite + React app in ./learn)
+# Builds the DriveAruba Learn app (Vite + React in ./learn) and publishes it
+# to the root of the GitHub Pages site (https://<owner>.github.io/claude-code-/).
 #
 # IMPORTANT one-time setup: in the repo's Settings -> Pages, set
 # "Build and deployment" -> Source to "GitHub Actions" (instead of a branch).
 # Until that's switched, this workflow builds successfully but nothing is published.
-name: Deploy site to GitHub Pages
+name: Deploy DriveAruba Learn to GitHub Pages
 
 on:
   push:
@@ -42,7 +41,7 @@ jobs:
         run: npm ci
         working-directory: learn
 
-      - name: Build DriveAruba Learn
+      - name: Build
         run: npm run build
         working-directory: learn
 
@@ -50,13 +49,11 @@ jobs:
         run: |
           set -e
           rm -rf _site
-          mkdir -p _site/learn
-          # Root of the site = the existing Velox AI landing page.
-          cp index.html _site/index.html
+          mkdir -p _site
+          # The built app IS the whole site now.
+          cp -r learn/dist/. _site/
           # .nojekyll stops Pages from running Jekyll over the output.
-          if [ -f .nojekyll ]; then cp .nojekyll _site/.nojekyll; else touch _site/.nojekyll; fi
-          # DriveAruba Learn lives at /learn (copy contents, incl. dotfiles).
-          cp -r learn/dist/. _site/learn/
+          touch _site/.nojekyll
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

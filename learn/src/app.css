@@ -1,0 +1,836 @@
+/* ============================================================
+   DriveAruba Learn — in-app (post-landing) styles.
+   Relies on the design tokens defined in index.css :root.
+   The app renders as a centered, phone-width column.
+   ============================================================ */
+
+/* ── Button helpers (extend .btn from index.css) ─────────── */
+.btn--lg {
+  font-size: 1.05rem;
+  padding: 1.05rem 2rem;
+}
+
+.btn--block {
+  display: flex;
+  width: 100%;
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--muted);
+  box-shadow: none;
+  border: 2px solid var(--border);
+}
+
+.btn--ghost:active:not(:disabled) {
+  transform: none;
+  box-shadow: none;
+}
+
+.btn + .btn {
+  margin-top: 0.6rem;
+}
+
+/* ── Landing tweaks for the new CTA ──────────────────────── */
+.hero__cta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.hero__nosignup {
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.footer__startlink {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+}
+
+.footer__startlink:hover {
+  color: var(--sun);
+}
+
+/* ── App shell ───────────────────────────────────────────── */
+.app {
+  max-width: 560px;
+  margin: 0 auto;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding-bottom: 84px;
+  background: var(--bg);
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7rem 1rem;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+
+.topbar__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.topbar__logo {
+  font-size: 1.2rem;
+}
+
+.topbar__name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.topbar__stats {
+  display: inline-flex;
+  gap: 0.4rem;
+}
+
+.chip {
+  font-size: 0.85rem;
+  font-weight: 800;
+  padding: 0.3rem 0.6rem;
+  border-radius: 9999px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.chip--streak {
+  color: #e8730c;
+  background: #fff3e6;
+  border-color: #ffe0bf;
+}
+
+.chip--xp {
+  color: #b8860b;
+  background: #fff8df;
+  border-color: #ffefae;
+}
+
+.chip--lvl {
+  color: var(--brand-dark);
+  background: #e8f5ff;
+  border-color: #cdeaff;
+}
+
+.app__content {
+  padding: 1rem 1rem 0;
+}
+
+/* ── Tab bar ─────────────────────────────────────────────── */
+.tabbar {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 560px;
+  z-index: 20;
+  display: flex;
+  background: #fff;
+  border-top: 1px solid var(--border);
+  box-shadow: 0 -4px 20px rgba(12, 60, 96, 0.06);
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+.tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0.6rem 0;
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-weight: 800;
+  font-size: 0.72rem;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.tab__icon {
+  font-size: 1.3rem;
+  filter: grayscale(0.4);
+  opacity: 0.7;
+}
+
+.tab--active {
+  color: var(--brand);
+}
+
+.tab--active .tab__icon {
+  filter: none;
+  opacity: 1;
+}
+
+/* ── Generic screen ──────────────────────────────────────── */
+.screen {
+  padding-bottom: 1.5rem;
+}
+
+.screen__title {
+  font-size: 1.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.screen__sub {
+  color: var(--muted);
+  margin-bottom: 1rem;
+}
+
+.center {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Learn path ──────────────────────────────────────────── */
+.learn__hero {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.learn__title {
+  font-size: 1.55rem;
+}
+
+.learn__sub {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin: 0.3rem 0 0.8rem;
+}
+
+.learn__track {
+  height: 12px;
+  background: #e2eef6;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.learn__track span {
+  display: block;
+  height: 100%;
+  background: var(--green);
+  transition: width 0.4s ease;
+}
+
+.unit {
+  margin-bottom: 1.5rem;
+}
+
+.unit__head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 1.1rem;
+  border-radius: var(--radius);
+  color: #fff;
+  box-shadow: var(--shadow-sm);
+}
+
+.unit__icon {
+  font-size: 1.6rem;
+}
+
+.unit__title {
+  font-size: 1.15rem;
+  color: #fff;
+}
+
+.unit__blurb {
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+.unit__path {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 0 0.5rem;
+}
+
+.node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0.55rem 0;
+  transform: translateX(var(--node-x, 0));
+}
+
+.node__btn {
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  border: 4px solid;
+  font-size: 1.5rem;
+  color: #fff;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: transform 0.08s ease;
+}
+
+.node__btn:active:not(:disabled) {
+  transform: translateY(3px);
+}
+
+.node__btn--open {
+  box-shadow: 0 5px 0 rgba(8, 40, 70, 0.18);
+}
+
+.node__btn--done {
+  box-shadow: 0 5px 0 rgba(8, 40, 70, 0.18);
+}
+
+.node__btn--locked {
+  background: #dce8f0;
+  border-color: #cdddea;
+  color: #9bb3c2;
+  cursor: not-allowed;
+  box-shadow: 0 4px 0 #cdddea;
+}
+
+.node__label {
+  margin-top: 0.4rem;
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--ink);
+  text-align: center;
+  max-width: 9rem;
+}
+
+.node__stars {
+  font-size: 0.8rem;
+  color: var(--sun);
+  letter-spacing: 1px;
+}
+
+.node__stars .dim {
+  color: #d7e3ec;
+}
+
+/* ── Lesson player ───────────────────────────────────────── */
+.player {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 560px;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+}
+
+.player__top {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.9rem 1rem;
+}
+
+.player__close {
+  border: none;
+  background: none;
+  font-size: 1.3rem;
+  color: var(--muted);
+  cursor: pointer;
+  line-height: 1;
+}
+
+.player__bar {
+  flex: 1;
+  height: 14px;
+  background: #e2eef6;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.player__bar span {
+  display: block;
+  height: 100%;
+  background: var(--green);
+  border-radius: 9999px;
+  transition: width 0.3s ease;
+}
+
+.player__hearts {
+  font-weight: 800;
+  color: var(--coral);
+  white-space: nowrap;
+}
+
+.player__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.5rem 1.1rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.player__unit {
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.8rem;
+}
+
+.player__foot {
+  border-top: 1px solid var(--border);
+  background: #fff;
+  padding: 1rem 1.1rem calc(1rem + env(safe-area-inset-bottom, 0));
+}
+
+.player__foot.is-correct {
+  background: #e9fbf1;
+  border-top-color: #bfe9d1;
+}
+
+.player__foot.is-wrong {
+  background: #ffecea;
+  border-top-color: #ffcfc8;
+}
+
+.feedback {
+  margin-bottom: 0.85rem;
+}
+
+.feedback strong {
+  display: block;
+  font-size: 1.05rem;
+  margin-bottom: 0.2rem;
+}
+
+.is-correct .feedback strong {
+  color: var(--green-dark);
+}
+
+.is-wrong .feedback strong {
+  color: #c0392b;
+}
+
+.feedback p {
+  font-size: 0.92rem;
+  color: var(--ink);
+  opacity: 0.85;
+}
+
+/* ── Question card ───────────────────────────────────────── */
+.qcard {
+  display: flex;
+  flex-direction: column;
+}
+
+.qcard__sign {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.qcard__prompt {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.3rem;
+  line-height: 1.3;
+  margin-bottom: 1.1rem;
+}
+
+.qcard__options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.opt2 {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--ink);
+  background: #fff;
+  border: 2px solid var(--border);
+  border-bottom-width: 4px;
+  border-radius: 14px;
+  padding: 0.9rem 1rem;
+  cursor: pointer;
+  transition: border-color 0.12s ease, background 0.12s ease;
+}
+
+.opt2:disabled {
+  cursor: default;
+}
+
+.opt2__bullet {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 8px;
+  background: var(--bg);
+  border: 2px solid var(--border);
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.opt2--selected {
+  border-color: var(--brand);
+  background: #eaf6ff;
+}
+
+.opt2--selected .opt2__bullet {
+  border-color: var(--brand);
+  color: var(--brand);
+}
+
+.opt2--correct {
+  border-color: var(--green);
+  background: #e9fbf1;
+  color: var(--green-dark);
+}
+
+.opt2--correct .opt2__bullet {
+  border-color: var(--green);
+  color: var(--green-dark);
+}
+
+.opt2--wrong {
+  border-color: var(--coral);
+  background: #ffecea;
+  color: #c0392b;
+}
+
+.opt2--wrong .opt2__bullet {
+  border-color: var(--coral);
+  color: #c0392b;
+}
+
+/* ── Result / fail screens ───────────────────────────────── */
+.player__body.result {
+  justify-content: center;
+  text-align: center;
+  gap: 0.4rem;
+}
+
+.result__emoji {
+  font-size: 3.5rem;
+}
+
+.result__title {
+  font-size: 1.8rem;
+}
+
+.result__sub {
+  color: var(--muted);
+  max-width: 22rem;
+  margin: 0.3rem auto 0.6rem;
+}
+
+.result__stars {
+  font-size: 2rem;
+  letter-spacing: 4px;
+  margin: 0.3rem 0;
+}
+
+.result__stars .star {
+  color: #d7e3ec;
+}
+
+.result__stars .star.on {
+  color: var(--sun);
+}
+
+.result__stats {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin: 1rem 0 1.5rem;
+}
+
+.result__stats div {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.9rem 1.4rem;
+  min-width: 6.5rem;
+}
+
+.result__stats strong {
+  display: block;
+  font-size: 1.5rem;
+  color: var(--brand);
+}
+
+.result__stats span {
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+/* ── Exam ────────────────────────────────────────────────── */
+.exam-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.exam-card__emoji {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.exam-card__best {
+  color: var(--muted);
+  margin-bottom: 1rem;
+}
+
+.exam-score {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 3.5rem;
+  line-height: 1;
+  margin: 0.5rem 0;
+}
+
+.exam-score.pass {
+  color: var(--green);
+}
+
+.exam-score.fail {
+  color: var(--coral);
+}
+
+.practice--run {
+  display: flex;
+  flex-direction: column;
+}
+
+.exam-progress {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 1.2rem;
+}
+
+.exam-progress__bar {
+  flex: 1;
+  height: 12px;
+  background: #e2eef6;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.exam-progress__bar span {
+  display: block;
+  height: 100%;
+  background: var(--brand);
+  border-radius: 9999px;
+  transition: width 0.3s ease;
+}
+
+.exam-progress__count {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--muted);
+}
+
+.practice--run .btn {
+  margin-top: 1.2rem;
+}
+
+/* ── Profile ─────────────────────────────────────────────── */
+.profile__card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 1.5rem;
+  text-align: center;
+  margin-bottom: 1.2rem;
+}
+
+.profile__avatar {
+  width: 4.5rem;
+  height: 4.5rem;
+  margin: 0 auto 0.7rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 2rem;
+  color: #fff;
+  background: linear-gradient(160deg, var(--brand-light), var(--brand-dark));
+}
+
+.profile__name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.4rem;
+  text-align: center;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--ink);
+  width: 100%;
+  max-width: 16rem;
+}
+
+.profile__name:focus {
+  border-bottom: 2px dashed var(--border);
+}
+
+.profile__level {
+  margin-top: 0.8rem;
+}
+
+.profile__level > span {
+  font-weight: 800;
+  color: var(--brand);
+}
+
+.profile__track {
+  height: 10px;
+  background: #e2eef6;
+  border-radius: 9999px;
+  overflow: hidden;
+  margin: 0.4rem 0;
+}
+
+.profile__track span {
+  display: block;
+  height: 100%;
+  background: var(--sun);
+}
+
+.profile__next {
+  font-size: 0.78rem;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+  margin-bottom: 1.2rem;
+}
+
+.stat {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  text-align: center;
+}
+
+.stat__num {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--ink);
+}
+
+.stat__lbl {
+  font-size: 0.78rem;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.profile__disclaimer {
+  margin-top: 1.2rem;
+  font-size: 0.78rem;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* ── Onboarding ──────────────────────────────────────────── */
+.onboard {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  background:
+    radial-gradient(60% 50% at 50% 0%, rgba(22, 166, 233, 0.16), transparent 70%),
+    var(--bg);
+}
+
+.onboard__card {
+  width: 100%;
+  max-width: 24rem;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+
+.onboard__emoji {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.onboard__title {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.onboard__sub {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-bottom: 1.2rem;
+}
+
+.onboard__input {
+  width: 100%;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.9rem 1.1rem;
+  border-radius: 12px;
+  border: 2px solid var(--border);
+  outline: none;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.onboard__input:focus {
+  border-color: var(--brand-light);
+  box-shadow: 0 0 0 4px rgba(22, 166, 233, 0.16);
+}

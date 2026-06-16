@@ -1,15 +1,17 @@
-import WaitlistForm from './WaitlistForm.jsx';
+import { navigate } from '../lib/router.js';
 
 export default function FinalCTA() {
   return (
     <section className="cta" id="join">
       <div className="cta__inner">
-        <h2 className="cta__title">Be first in line when we launch</h2>
+        <h2 className="cta__title">Ready to hit the road?</h2>
         <p className="cta__sub">
-          Join the waitlist and we'll let you know the moment DriveAruba Learn
-          goes live. No spam — just your ticket to a confident pass.
+          Jump into your first lesson now — it's free, there's no sign-up, and
+          your streak starts today.
         </p>
-        <WaitlistForm id="email-cta" variant="cta" />
+        <button className="btn btn--primary btn--lg" onClick={() => navigate('/learn')}>
+          Start learning
+        </button>
       </div>
     </section>
   );

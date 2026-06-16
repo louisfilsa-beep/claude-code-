@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Logo from './Logo.jsx';
+import { navigate } from '../lib/router.js';
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -16,9 +17,9 @@ export default function Nav() {
       <a className="nav__brand" href="#top" aria-label="DriveAruba Learn home">
         <Logo />
       </a>
-      <a className="btn btn--sm btn--primary" href="#join">
-        Join the waitlist
-      </a>
+      <button className="btn btn--sm btn--primary" onClick={() => navigate('/learn')}>
+        Start learning
+      </button>
     </nav>
   );
 }
