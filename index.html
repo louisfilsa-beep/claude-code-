@@ -537,10 +537,10 @@
   </footer>
 
   <script>
-    // ── Waitlist form handler ──
-    // Submits to Formspree. Replace YOUR_FORM_ID with your actual Formspree form ID
-    // (sign up free at formspree.io, create a form, and paste the ID here).
-    const FORMSPREE_ID = 'YOUR_FORM_ID';
+    // ── Waitlist form handler (Google Sheets via Apps Script) ──
+    // Paste your deployed Apps Script Web App URL below (see apps-script/SETUP.md).
+    // Until then, the form runs in DEMO MODE (stores emails in the browser only).
+    const SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL';
 
     const waitlistEmails = new Set(
       JSON.parse(localStorage.getItem('velox_waitlist') || '[]')
@@ -549,13 +549,12 @@
     async function handleSubmit(e, msgId = 'form-msg') {
       e.preventDefault();
 
-      const form    = e.target;
-      const inputId = form.querySelector('input[type="email"]').id;
-      const btnId   = form.querySelector('button[type="submit"]').id;
-      const input   = document.getElementById(inputId);
-      const btn     = document.getElementById(btnId);
-      const msg     = document.getElementById(msgId);
-      const email   = input.value.trim();
+      const form     = e.target;
+      const input    = form.querySelector('input[type="email"]');
+      const btn      = form.querySelector('button[type="submit"]');
+      const msg      = document.getElementById(msgId);
+      const email    = input.value.trim();
+      const original = btn.textContent;
 
       if (waitlistEmails.has(email)) {
         showMsg(msg, "You're already on the list! We'll be in touch.", 'success');
@@ -567,37 +566,42 @@
       msg.className = '';
       msg.textContent = '';
 
-      if (FORMSPREE_ID === 'YOUR_FORM_ID') {
-        // Demo mode — no Formspree ID configured yet
-        await new Promise(r => setTimeout(r, 800));
+      const remember = () => {
         waitlistEmails.add(email);
         localStorage.setItem('velox_waitlist', JSON.stringify([...waitlistEmails]));
+      };
+
+      if (SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL') {
+        // Demo mode — no backend configured yet
+        await new Promise(r => setTimeout(r, 700));
+        remember();
         showMsg(msg, "🎉 You're on the list! We'll email you when we launch.", 'success');
         input.value = '';
-        btn.textContent = 'You\'re in!';
+        btn.textContent = "You're in!";
         return;
       }
 
       try {
-        const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        const res = await fetch(SCRIPT_URL, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify({ email }),
+          // text/plain avoids a CORS preflight that Apps Script can't answer
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({ email, source: 'velox-landing' }),
         });
+        const out = await res.json();
 
-        if (res.ok) {
-          waitlistEmails.add(email);
-          localStorage.setItem('velox_waitlist', JSON.stringify([...waitlistEmails]));
+        if (out.result === 'success') {
+          remember();
           showMsg(msg, "🎉 You're on the list! We'll email you when we launch.", 'success');
           input.value = '';
-          btn.textContent = 'You\'re in!';
+          btn.textContent = "You're in!";
         } else {
-          throw new Error('server error');
+          throw new Error(out.message || 'server error');
         }
       } catch {
         showMsg(msg, 'Something went wrong. Please try again.', 'error');
         btn.disabled = false;
-        btn.textContent = 'Get early access';
+        btn.textContent = original;
       }
     }
 
